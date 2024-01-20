@@ -1,5 +1,9 @@
-nyanlang : {
-    "hello/hi" : "nyanayn",
+import string
+import random
+
+nyanlang = {
+    "hello" : "nyanayn",
+    "hi" : "nyanayn",
     "pain" : "ouchy-nyaouchy",
     "angry" : "hiss",
     "hate" : "hiss",
@@ -52,10 +56,37 @@ nyanlang : {
     "!" : "meow~!",
     "?" : "nya~?",
 }
+
 def nyan_translate(message):
-    user_input = message
+    if (int(random.random() * 100) >= 69):
+        return "Nyan nyu nyimyaginye myean nyimyaginyary mewnnyagerie myanyager myagining myanyaging myean nyimyaginyary mewnnyagerie nya~?"
+    words = []
+    punctuation_used = []
+
+    for char in message:
+        if char in string.punctuation:
+            punctuation_used.append(char)
+        else:
+            words.append(char)
+
+    words = ''.join(words).split()
     output = ""
-    for c in user_input:
-        nyan_char = nyanlang.get(c.lower())
-        output = output + nyan_char
+    for word in words:
+        if word.lower() in nyanlang.keys():
+            nyan_word = nyanlang.get(word.lower())
+        else: 
+            nyan_word = word.replace("ma","mya")
+            nyan_word = word.replace("na","nya")
+            nyan_word = word.replace("me","mewn")
+
+        output = output + " " + nyan_word
+
+    if (len(punctuation_used) != 0):
+        nyan_punctuation = nyanlang.get(punctuation_used[-1])
+        output = output + " " + nyan_punctuation
+    else:
+        output = output + " " + "nya~"
+
     return output
+
+print(nyan_translate("nani"))
