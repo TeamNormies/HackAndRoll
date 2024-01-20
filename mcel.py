@@ -27,10 +27,10 @@ mclang = {
     "Z": "⨅",
 }
 
-def mcelTranslate(message): 
-    userInput = message
+def mcel_translate(message): 
+    user_input = message
     output = ""
-    for c in userInput:
-        mcChar = mclang.get(c.upper())
-        output = output + mcChar
+    for c in user_input:
+        mc_char = mclang.get(c.upper())
+        output = output + mc_char
     return output
