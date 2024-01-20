@@ -1,6 +1,9 @@
 import os
 import telebot
 from dotenv_vault import load_dotenv
+
+from translation import eng_to_jap
+from shakespeare import translate_to_shakespeare
 from mcel import mcel_translate
 from nyan import nyan_translate
 from uwu import english_to_uwu
@@ -9,6 +12,7 @@ from owo import english_to_owo
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
+
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -61,9 +65,31 @@ def modifyMCEL(message):
     output = mcelTranslate(message.text)
     bot.send_message(message.chat.id, output)
 
+    
+@bot.message_handler(commands=['jp'])
+def toggle_jp(message):
+    bot.send_message(message.chat.id, "What do you want to say in Japanese?")
+    bot.register_next_step_handler(message, translate_jp)
+
+def translate_jp(msg):
+    res = eng_to_jap(msg.text)
+    bot.send_message(msg.chat.id, res)
+
+
+@bot.message_handler(commands=['shakespeare'])
+def toggle_jp(message):
+    bot.send_message(message.chat.id, "Shakespeare what?")
+    bot.register_next_step_handler(message, shakespeare)
+
+def shakespeare(msg):
+    res = translate_to_shakespeare(msg.text)
+    bot.send_message(msg.chat.id, res)
+
+
 def translate_uwu(message):
     res = english_to_uwu(message.text)
     bot.send_message(message.chat.id, res)
+
 
 if __name__ == "__main__":
     bot.infinity_polling()
