@@ -62,7 +62,7 @@ def modify_mcel(message):
     bot.send_message(message.chat.id, output)
 
     
-@bot.message_handler(commands=['jp'])
+@bot.message_handler(commands=['Japanese'])
 def toggle_jp(message):
     bot.send_message(message.chat.id, "What do you want to say in Japanese?")
     bot.register_next_step_handler(message, translate_jp)
@@ -72,7 +72,7 @@ def translate_jp(msg):
     bot.send_message(msg.chat.id, res)
 
 
-@bot.message_handler(commands=['shakespeare'])
+@bot.message_handler(commands=['Shakespeare'])
 def toggle_jp(message):
     bot.send_message(message.chat.id, "Shakespeare what?")
     bot.register_next_step_handler(message, shakespeare)
