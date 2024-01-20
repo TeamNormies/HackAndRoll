@@ -24,7 +24,7 @@ def handle_start(message):
     btn3 = telebot.types.KeyboardButton("/Nyan")
     btn4 = telebot.types.KeyboardButton("/MCEL")
     btn5 = telebot.types.KeyboardButton("/Japanese")
-    btn6 = telebot.types.KeyboardButton("/Shakespear")
+    btn6 = telebot.types.KeyboardButton("/Shakespeare")
     btn7 = telebot.types.KeyboardButton("/Fun")
     markup.add(btn1,btn2,btn3)
     markup.add(btn4,btn5,btn6)
