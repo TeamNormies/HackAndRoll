@@ -31,6 +31,9 @@ def mcel_translate(message):
     user_input = message
     output = ""
     for c in user_input:
-        mc_char = mclang.get(c.upper())
+        if (c.isalpha()):
+            mc_char = mclang.get(c.upper(), c)
+        else: 
+            mc_char = c
         output = output + mc_char
     return output
