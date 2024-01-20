@@ -38,15 +38,15 @@ def toggle_nyan(message):
     bot.send_message(message.chat.id, "Say something!")
     bot.register_next_step_handler(message, modify_nyan)
 
+def modify_nyan(message):
+    output = nyan_translate(message.text)
+    bot.send_message(message.chat.id, output)
+
 @bot.message_handler(commands=['owo', 'OwO'])
 def owoify_message(message):
     text = "Enter text to OwOify!"
     sent_msg = bot.send_message(message.chat.id, text)
     bot.register_next_step_handler(sent_msg, translate_owo)
-    
-def modify_nyan(message):
-    output = nyan_translate(message.text)
-    bot.send_message(message.chat.id, output)
 
 @bot.message_handler(commands=['uwu'])
 def uwuify_message(message):
