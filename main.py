@@ -4,6 +4,7 @@ from dotenv_vault import load_dotenv
 from mcel import mcel_translate
 from nyan import nyan_translate
 from uwu import english_to_uwu
+from owo import english_to_owo
 
 load_dotenv()
 
@@ -37,6 +38,12 @@ def toggle_nyan(message):
     bot.send_message(message.chat.id, "Say something!")
     bot.register_next_step_handler(message, modify_nyan)
 
+@bot.message_handler(commands=['owo', 'OwO'])
+def owoify_message(message):
+    text = "Enter text to OwOify!"
+    sent_msg = bot.send_message(message.chat.id, text)
+    bot.register_next_step_handler(sent_msg, translate_owo)
+    
 def modify_nyan(message):
     output = nyan_translate(message.text)
     bot.send_message(message.chat.id, output)
@@ -45,6 +52,15 @@ def modify_nyan(message):
 def uwuify_message(message):
     bot.send_message(message.chat.id, "uwuify youw message!")
     bot.register_next_step_handler(message, translate_uwu)
+
+def translate_owo(message): 
+    output = english_to_owo(message.text) 
+    bot.send_message(message.chat.id, output)
+
+def modifyMCEL(message):
+    output = mcelTranslate(message.text)
+    bot.send_message(message.chat.id, output)
+
 def translate_uwu(message):
     res = english_to_uwu(message.text)
     bot.send_message(message.chat.id, res)
