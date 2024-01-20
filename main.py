@@ -1,6 +1,7 @@
 import os
 import telebot
 from dotenv_vault import load_dotenv
+from mcel import mcelTranslate
 
 load_dotenv()
 
@@ -12,8 +13,14 @@ bot = telebot.TeleBot(TOKEN)
 def send_welcome(message):
     bot.reply_to(message, "Howdy, how are you doing?")
 
-@bot.message_handler(func=lambda msg: True)
-def echo_all(message):
-    bot.reply_to(message, message.text)
+@bot.message_handler(commands=['4'])
+def toggleMCEL(message):
+    bot.send_message(message.chat.id, "Say something!")
+    bot.register_next_step_handler(message, modifyMCEL)
 
-bot.infinity_polling()
+def modifyMCEL(message):
+    output = mcelTranslate(message.text)
+    bot.send_message(message.chat.id, output)
+
+if __name__ == "__main__":
+    bot.infinity_polling()
